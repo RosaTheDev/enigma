@@ -3,7 +3,7 @@ require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
   def setup
-    @enigma = Enigma.new("pizza", [5, 7, 2, 4])
+    @enigma = Enigma.new('pizza', [5, 7, 2, 4])
   end
 
   def test_enigma_exists
@@ -15,7 +15,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_enigma_takes_a_message
-    assert_equal "pizza", @enigma.message
+    assert_equal 'pizza', @enigma.message
   end
 
   def test_date
@@ -23,19 +23,19 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_enigma_has_characters
-    assert @enigma.characters.include? "a"
-    assert @enigma.characters.include? "0"
-    assert @enigma.characters.include? "."
+    assert @enigma.characters.include? 'a'
+    assert @enigma.characters.include? '0'
+    assert @enigma.characters.include? '.'
   end
 
   def test_split_into_four_ints
-    key_array = @enigma.split(32435)
+    key_array = @enigma.split(32_435)
 
     assert_equal 4, key_array.length
   end
 
   def test_each_split_is_between_0_and_100
-    key_array = @enigma.split(32435)
+    key_array = @enigma.split(32_435)
 
     assert key_array[0] < 100 && key_array[0] > 0
     assert key_array[1] < 100 && key_array[0] > 0
