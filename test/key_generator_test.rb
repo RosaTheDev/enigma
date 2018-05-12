@@ -13,6 +13,19 @@ class KeyGeneratorTest < Minitest::Test
 
   def test_date
     key_gen = KeyGenerator.new
+
     assert_equal '05-11-2018', key_gen.date
+  end
+
+  def test_split_key_into_four_ints
+    key_gen = KeyGenerator.new
+
+    assert_equal 4, key_gen.split_key.length
+  end
+
+  def test_each_split_key_is_between_0_and_100
+    key_gen = KeyGenerator.new
+
+    assert key_gen.split
   end
 end
