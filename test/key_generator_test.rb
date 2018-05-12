@@ -8,7 +8,6 @@ class KeyGeneratorTest < Minitest::Test
 
   def test_key
     key_gen = KeyGenerator.new
-    assert key_gen.key < 100000 && key_gen.key > 9999
-
+    assert key_gen.key < 100_000 && key_gen.key > 9_999
   end
 end
