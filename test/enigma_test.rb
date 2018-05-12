@@ -11,5 +11,5 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_encode_a_letter
-
+  end
 end
