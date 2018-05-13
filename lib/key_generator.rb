@@ -3,6 +3,6 @@ class KeyGenerator
   attr_reader :key
 
   def initialize
-    @key = rand(10_000...99_999)
+    @rand_key = rand(10_000...99_999)
   end
 end
