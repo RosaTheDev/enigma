@@ -3,7 +3,7 @@ require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
   def setup
-    @enigma = Enigma.new('pizza', 32_435)
+    @enigma = Enigma.new('pizza', 32_435, '051218')
   end
 
   def test_enigma_exists
@@ -23,35 +23,45 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_enigma_has_characters
-    # skip
     assert @enigma.characters.include? 'a'
     assert @enigma.characters.include? '0'
     assert @enigma.characters.include? '.'
   end
 
-  def test_split_into_four_ints
-    # skip
+  def test_split_into_four_strings
     key_array = @enigma.split_into_four_strings
 
-    assert_equal 4, key_array.length
+    assert_equal ['32', '24', '43', '35'], key_array
   end
 
   def test_change_four_strings_to_ints
-    # skip
     key_array = @enigma.split_into_four_strings
     key_ints = @enigma.strings_to_ints(key_array)
 
-    assert_instance_of Integer, key_ints[0]
+    assert_equal [32, 24, 43, 35], key_ints
   end
 
-  def test_each_split_is_between_0_and_100
-    # skip
-    key_array = @enigma.split_into_four_strings
-    key_ints = @enigma.strings_to_ints(key_array)
+  def test_squared_date
+    assert_equal 2623283524, @enigma.square_date
+  end
 
-    assert key_ints[0] < 100 && key_ints[0] > 0
-    assert key_ints[1] < 100 && key_ints[0] > 0
-    assert key_ints[2] < 100 && key_ints[0] > 0
-    assert key_ints[3] < 100 && key_ints[0] > 0
+  def test_last_four_digits_of_date_squared
+    sqr_date  = @enigma.square_date
+    last_four = @enigma.last_four_digits_of_date_squared(sqr_date)
+
+    assert_equal ['3', '5', '2', '4'], last_four
+  end
+
+  def test_final_key_for_encode
+    key_array = @enigma.split_into_four_strings
+    key_ints  = @enigma.strings_to_ints(key_array)
+
+    sqr_date  = @enigma.square_date
+    last_four = @enigma.last_four_digits_of_date_squared(sqr_date)
+    date_ints = @enigma.strings_to_ints(last_four)
+
+    final_code_key = @enigma.final_key_for_encode(key_ints, date_ints)
+
+    assert_equal [35, 29, 45, 39], final_code_key
   end
 end
