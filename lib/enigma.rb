@@ -1,3 +1,4 @@
+# this is a comment to keep rubocop quiet
 class Enigma
   attr_reader :key,
               :message,
@@ -16,4 +17,25 @@ class Enigma
                    '2', '3', '4', '5', '6', '7', '8',\
                    '9', ' ', '.', ',']
   end
+
+  def split_into_four_strings
+    key = []
+    split_array = @key.to_s.split('')
+    split_array.each_index do |i|
+      if i == 4
+        i
+      else
+        key << split_array[i] + split_array[i + 1]
+      end
+    end
+    key
+  end
+
+  def strings_to_ints(key_array)
+    key_array.map do |string|
+      string.to_i
+    end
+  end
+
+
 end
