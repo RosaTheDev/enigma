@@ -23,18 +23,21 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_enigma_has_characters
+    # skip
     assert @encryptor.characters.include? 'a'
     assert @encryptor.characters.include? '0'
     assert @encryptor.characters.include? '.'
   end
 
   def test_split_into_four_strings
+    # skip
     key_array = @encryptor.split_into_four_strings
 
     assert_equal ['32', '24', '43', '35'], key_array
   end
 
   def test_change_four_strings_to_ints
+    # skip
     key_array = @encryptor.split_into_four_strings
     key_ints = @encryptor.strings_to_ints(key_array)
 
@@ -42,10 +45,12 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_squared_date
-    assert_equal 2623283524, @encryptor.square_date
+    # skip
+    assert_equal 2_623_283_524, @encryptor.square_date
   end
 
   def test_last_four_digits_of_date_squared
+    # skip
     sqr_date  = @encryptor.square_date
     last_four = @encryptor.last_four_digits_of_date_squared(sqr_date)
 
@@ -53,6 +58,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_final_key_for_encode
+    # skip
     key_array = @encryptor.split_into_four_strings
     key_ints  = @encryptor.strings_to_ints(key_array)
 
@@ -66,6 +72,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_split_message
+    # skip
     expected = ["t", "h", "i", "s", " ", "i", "s", " ",\
                 "s", "o", " ", "s", "e", "c", "r", "e", "t",\
                 " ", ".", ".", "e", "n", "d", ".", "."]
@@ -75,6 +82,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_encrypt
+    # skip
     key_array = @encryptor.split_into_four_strings
     key_ints  = @encryptor.strings_to_ints(key_array)
 
