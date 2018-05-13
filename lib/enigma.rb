@@ -1,3 +1,4 @@
+
 # this is a comment to keep rubocop quiet
 class Enigma
   attr_reader :key,
@@ -36,6 +37,4 @@ class Enigma
       string.to_i
     end
   end
-
-
 end

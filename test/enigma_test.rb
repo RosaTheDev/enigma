@@ -19,7 +19,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_date
-    assert_equal '051218', @enigma.date
+    assert_equal '051318', @enigma.date
   end
 
   def test_enigma_has_characters
