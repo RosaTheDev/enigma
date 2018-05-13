@@ -36,6 +36,4 @@ class Enigma
       string.to_i
     end
   end
-
-
 end
