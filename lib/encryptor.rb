@@ -1,3 +1,4 @@
+# this is our encryptor class
 class Encryptor
   attr_reader :key,
               :message,
@@ -34,5 +35,38 @@ class Encryptor
     key_array.map do |string|
       string.to_i
     end
+  end
+
+  def square_date
+    @date.to_i**2
+  end
+
+  def last_four_digits_of_date_squared(sqrt_date)
+    sqrt_date.to_s[-4..-1].chars
+  end
+
+  def final_key_for_encode(key_int, date_ints)
+    final_code = []
+    key_int.each_index do |index|
+      final_code << key_int[index] + date_ints[index]
+    end
+    final_code
+  end
+
+  def split_message
+    @message.chars
+  end
+
+  def encrypt(message, key_ints, date_ints)
+    encoded = []
+    message_enum = message.to_enum
+    final_key = final_key_for_encode(key_ints, date_ints)
+    loop do
+      letter = message_enum.next
+      x = @characters.rotate(@characters.index(letter) + final_key[0])
+      encoded << x[0]
+      final_key.rotate!
+    end
+    encoded.join
   end
 end
