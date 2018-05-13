@@ -1,8 +1,8 @@
 # this is a file about the egnigma machine from the world war the sequal
 class KeyGenerator
-  attr_reader :key
+  attr_reader :rand_key
 
   def initialize
-    @key = rand(10_000...99_999)
+    @rand_key = rand(10_000...99_999)
   end
 end
