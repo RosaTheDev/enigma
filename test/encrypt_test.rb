@@ -73,15 +73,15 @@ class EncryptTest < Minitest::Test
 
   def test_split_message
     # skip
-    expected = ["t", "h", "i", "s", " ", "i", "s", " ",\
-                "s", "o", " ", "s", "e", "c", "r", "e", "t",\
-                " ", ".", ".", "e", "n", "d", ".", "."]
+    expected = ['t', 'h', 'i', 's', ' ', 'i', 's', ' ',\
+                's', 'o', ' ', 's', 'e', 'c', 'r', 'e', 't',\
+                ' ', '.', '.', 'e', 'n', 'd', '.', '.']
     actual   = @encrypt.split_message
 
     assert_equal expected, actual
   end
 
   def test_encryptor
-    assert_equal "p os6.y oedsa5xep0e.adj.7", @encrypt.encryptor
+    assert_equal 'p os6.y oedsa5xep0e.adj.7', @encrypt.encryptor
   end
 end

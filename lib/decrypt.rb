@@ -1,10 +1,6 @@
-<<<<<<< HEAD:lib/decryptor.rb
-# this is our decryptor class
-class Decryptor
-=======
+
 # this is our encryptor class
 class Decrypt
->>>>>>> afe1f62969db283895e00cb3ba8b4da82f1d80fa:lib/decrypt.rb
   attr_reader :key,
               :message,
               :date,

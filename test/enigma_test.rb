@@ -11,7 +11,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_spec_interaction_for_enigma
-    expected = "p os6.y oedsa5xep0e.adj.7"
+    expected = 'p os6.y oedsa5xep0e.adj.7'
     actual   = @e.encrypt('this is so secret ..end..',\
                32_435, '051218')
 
