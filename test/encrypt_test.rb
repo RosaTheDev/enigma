@@ -6,15 +6,15 @@ class EncryptTest < Minitest::Test
     @encrypt = Encrypt.new('this is so secret ..end..', 32_435, '051218')
   end
 
-  def test_enigma_exists
+  def test_encrypt_exists
     assert_instance_of Encrypt, @encrypt
   end
 
-  def test_enigma_takes_a_key
+  def test_encrypt_takes_a_key
     assert_equal 32_435, @encrypt.key
   end
 
-  def test_enigma_takes_a_message
+  def test_encrypt_takes_a_message
     assert_equal 'this is so secret ..end..', @encrypt.message
   end
 
@@ -22,7 +22,7 @@ class EncryptTest < Minitest::Test
     assert_equal '051218', @encrypt.date
   end
 
-  def test_enigma_has_characters
+  def test_encrypt_has_characters
     # skip
     assert @encrypt.characters.include? 'a'
     assert @encrypt.characters.include? '0'
