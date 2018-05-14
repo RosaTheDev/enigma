@@ -11,6 +11,10 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_what_the_fuck
-    assert_equal "p os6.y oedsa5xep0e.adj.7", @e.encrypt('this is so secret ..end..', 32_435, '051218')
+    expected = "p os6.y oedsa5xep0e.adj.7"
+    actual   = @e.encrypt('this is so secret ..end..',\
+               32_435, '051218')
+               
+    assert_equal expected, actual
   end
 end
