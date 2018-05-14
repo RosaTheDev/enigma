@@ -1,10 +1,12 @@
+require './lib/methods_for_encryptor_and_decryptor'
 # this is our encryptor class
-class Decryptor
+class Decrypt
+  include MethodsForEncAndDec
   attr_reader :key,
               :message,
               :date,
               :characters
-
+              #message and key are nil because in the spec they are not required and if you do not assign them a value they return an error
   def initialize(message = nil, key = nil,\
                  date = Date.today.strftime('%m%d%y'))
     @message    = message
@@ -18,51 +20,19 @@ class Decryptor
                    '9', ' ', '.', ',']
   end
 
-  def split_into_four_strings
-    key = []
-    split_array = @key.to_s.split('')
-    split_array.each_index do |i|
-      if i == 4
-        i
-      else
-        key << split_array[i] + split_array[i + 1]
-      end
-    end
-    key
-  end
+  def decryptor
 
-  def strings_to_ints(key_array)
-    key_array.map do |string|
-      string.to_i
-    end
-  end
-
-  def square_date
-    @date.to_i**2
-  end
-
-  def last_four_digits_of_date_squared(sqrt_date)
-    sqrt_date.to_s[-4..-1].chars
-  end
-
-  def final_key_for_encode(key_int, date_ints)
-    final_code = []
-    key_int.each_index do |index|
-      final_code << key_int[index] + date_ints[index]
-    end
-    final_code
-  end
-
-  def split_message
-    @message.chars
-  end
-
-  def encrypt(message, key_ints, date_ints)
     encoded = []
-    message_enum = message.to_enum
+
+    message_enum = split_message.to_enum
+
     final_key = final_key_for_encode(key_ints, date_ints)
+
+    ##change vairable names from single letter variables to something more clear "char_rotate"
+    # require'pry';binding.pry
     loop do
       letter = message_enum.next
+      #changed this variable to a negitive because we are reversing the key in order to decrypt it
       x = @characters.rotate(@characters.index(letter) - final_key[0])
       encoded << x[0]
       final_key.rotate!
