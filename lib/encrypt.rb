@@ -29,7 +29,6 @@ class Encrypt
       end
     end
     key
-    strings_to_ints(key)
   end
 
   def strings_to_ints(key_array)
@@ -40,12 +39,14 @@ class Encrypt
 
   def square_date
     sqr = @date.to_i**2
-    last_four_digits_of_date_squared(sqr)
   end
 
   def last_four_digits_of_date_squared(sqrt_date)
-    last_four = sqrt_date.to_s[-4..-1].chars
-    strings_to_ints(last_four)
+     sqrt_date.to_s[-4..-1].chars
+  end
+
+  def last_four_digits_of_date_squared(sqrt_date)
+    sqrt_date.to_s[-4..-1].chars
   end
 
   def final_key_for_encode(key_int, date_ints)
@@ -60,14 +61,12 @@ class Encrypt
     @message.chars
   end
 
-  def encryptor
+  def encryptor(message, key_ints, date_ints)
     encoded = []
-    key = split_into_four_strings
-    date = square_date
-    message = split_message.to_enum
-    final_key = final_key_for_encode(key, date)
+    message_enum = message.to_enum
+    final_key = final_key_for_encode(key_ints, date_ints)
     loop do
-      letter = message.next
+      letter = message_enum.next
       x = @characters.rotate(@characters.index(letter) + final_key[0])
       encoded << x[0]
       final_key.rotate!
