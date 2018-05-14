@@ -73,10 +73,10 @@ class DecryptorTest < Minitest::Test
 
   def test_split_message
     # skip
-    expected = ["p", " ", "o", "s", "6", ".",\
-                "y", " ", "o", "e", "d", "s",\
-                "a", "5", "x", "e", "p", "0",\
-                "e", ".", "a", "d", "j", ".","7"]
+    expected = ['p', ' ', 'o', 's', '6', '.',\
+                'y', ' ', 'o', 'e', 'd', 's',\
+                'a', '5', 'x', 'e', 'p', '0',\
+                'e', '.', 'a', 'd', 'j', '.', '7']
     actual   = @decryptor.split_message
 
     assert_equal expected, actual

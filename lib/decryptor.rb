@@ -1,4 +1,4 @@
-# this is our encryptor class
+# this is our decryptor class
 class Decryptor
   attr_reader :key,
               :message,
