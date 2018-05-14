@@ -15,10 +15,6 @@ class CrackTest < Minitest::Test
     assert_equal 'm5g536qkl,85 0prmv9l .bl4', @crack.message
   end
 
-  def test_crack_takes_a_key
-    assert_equal 32_435, @crack.key
-  end
-
   def test_crack_takes_a_date
     assert_equal '051218', @crack.date
   end
@@ -29,10 +25,15 @@ class CrackTest < Minitest::Test
     assert @crack.characters.include? '.'
   end
 
-  def test_last_four_chars_of_message
-    last_four = @crack.last_four_chars_of_message
-    assert_equal '.bl4', last_four
+  def test_last_four_chars_of_encryption_into_array
+    last_four = @crack.last_four_chars_of_encryption_into_array
+    assert_equal [".", "b", "l", "4"], last_four
   end
 
-  def test_find_key_values_from_last_4
+  def test_compare_encrypted_chars_with_known_end_chars
+    last_four = @crack.last_four_chars_of_encryption_into_array
+    encrypt_nums = @crack.compare_chars_with_known_end(last_four)
+
+    assert_equal [15, 2, 26, 7], encrypt_nums
+  end
 end
