@@ -82,7 +82,6 @@ class EncryptTest < Minitest::Test
   end
 
   def test_encryptor
-    git hub sucks
     assert_equal "p os6.y oedsa5xep0e.adj.7", @encrypt.encryptor
   end
 end
