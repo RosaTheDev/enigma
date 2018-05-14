@@ -6,15 +6,15 @@ class EncryptTest < Minitest::Test
     @encrypt = Encrypt.new('this is so secret ..end..', 32_435, '051218')
   end
 
-  def test_enigma_exists
+  def test_encrypt_exists
     assert_instance_of Encrypt, @encrypt
   end
 
-  def test_enigma_takes_a_key
+  def test_encrypt_takes_a_key
     assert_equal 32_435, @encrypt.key
   end
 
-  def test_enigma_takes_a_message
+  def test_encrypt_takes_a_message
     assert_equal 'this is so secret ..end..', @encrypt.message
   end
 
@@ -22,7 +22,7 @@ class EncryptTest < Minitest::Test
     assert_equal '051218', @encrypt.date
   end
 
-  def test_enigma_has_characters
+  def test_encrypt_has_characters
     # skip
     assert @encrypt.characters.include? 'a'
     assert @encrypt.characters.include? '0'
@@ -73,15 +73,19 @@ class EncryptTest < Minitest::Test
 
   def test_split_message
     # skip
-    expected = ["t", "h", "i", "s", " ", "i", "s", " ",\
-                "s", "o", " ", "s", "e", "c", "r", "e", "t",\
-                " ", ".", ".", "e", "n", "d", ".", "."]
+    expected = ['t', 'h', 'i', 's', ' ', 'i', 's', ' ',\
+                's', 'o', ' ', 's', 'e', 'c', 'r', 'e', 't',\
+                ' ', '.', '.', 'e', 'n', 'd', '.', '.']
     actual   = @encrypt.split_message
 
     assert_equal expected, actual
   end
 
   def test_encryptor
+<<<<<<< HEAD:test/encryptor_test.rb
     assert_equal "p os6.y oedsa5xep0e.adj.7", @encrypt.encryptor
+=======
+    assert_equal 'p os6.y oedsa5xep0e.adj.7', @encrypt.encryptor
+>>>>>>> 4388704a10b63cef43396201a37a3fd766654767:test/encrypt_test.rb
   end
 end

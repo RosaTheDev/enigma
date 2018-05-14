@@ -28,7 +28,7 @@ class Encrypt
         key << split_array[i] + split_array[i + 1]
       end
     end
-      key
+    key
   end
 
   def strings_to_ints(key_array)
@@ -58,7 +58,6 @@ class Encrypt
   end
 
   def encryptor
-    encoded = []
     key_array = self.split_into_four_strings
     key_ints  = self.strings_to_ints(key_array)
 
@@ -66,7 +65,9 @@ class Encrypt
     last_four = self.last_four_digits_of_date_squared(sqr_date)
     date_ints = self.strings_to_ints(last_four)
 
-    message_enum = self.split_message.to_enum
+    encoded = []
+
+    message_enum = split_message.to_enum
 
     final_key = final_key_for_encode(key_ints, date_ints)
 
