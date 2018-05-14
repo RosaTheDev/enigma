@@ -1,5 +1,5 @@
 # this is our encryptor class
-class Encryptor
+class Encrypt
   attr_reader :key,
               :message,
               :date,
@@ -38,7 +38,11 @@ class Encryptor
   end
 
   def square_date
-    @date.to_i**2
+    sqr = @date.to_i**2
+  end
+
+  def last_four_digits_of_date_squared(sqrt_date)
+     sqrt_date.to_s[-4..-1].chars
   end
 
   def last_four_digits_of_date_squared(sqrt_date)
@@ -57,7 +61,7 @@ class Encryptor
     @message.chars
   end
 
-  def encrypt(message, key_ints, date_ints)
+  def encryptor(message, key_ints, date_ints)
     encoded = []
     message_enum = message.to_enum
     final_key = final_key_for_encode(key_ints, date_ints)
