@@ -30,6 +30,7 @@ class EncryptTest < Minitest::Test
   end
 
   def test_split_into_four_strings
+    # skip
     key_array = @encrypt.split_into_four_strings
 
     assert_equal ['32', '24', '43', '35'], key_array
@@ -44,6 +45,7 @@ class EncryptTest < Minitest::Test
   end
 
   def test_squared_date
+    # skip
     assert_equal 2_623_283_524, @encrypt.square_date
   end
 
@@ -56,11 +58,17 @@ class EncryptTest < Minitest::Test
   end
 
   def test_final_key_for_encode
+    # skip
     key_array = @encrypt.split_into_four_strings
+    key_ints  = @encrypt.strings_to_ints(key_array)
 
     sqr_date  = @encrypt.square_date
+    last_four = @encrypt.last_four_digits_of_date_squared(sqr_date)
+    date_ints = @encrypt.strings_to_ints(last_four)
 
-    assert_equal [35, 29, 45, 39], @encrypt.final_key_for_encode(key_array, sqr_date )
+    final_code_key = @encrypt.final_key_for_encode(key_ints, date_ints)
+
+    assert_equal [35, 29, 45, 39], final_code_key
   end
 
   def test_split_message
@@ -74,8 +82,6 @@ class EncryptTest < Minitest::Test
   end
 
   def test_encryptor
-    secret_message = @encrypt.encryptor
-
-    assert_equal "p os6.y oedsa5xep0e.adj.7", secret_message
+    assert_equal "p os6.y oedsa5xep0e.adj.7", @encrypt.encryptor
   end
 end
