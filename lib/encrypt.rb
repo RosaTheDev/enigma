@@ -65,6 +65,7 @@ class Encrypt
     sqr_date  = self.square_date
     last_four = self.last_four_digits_of_date_squared(sqr_date)
     date_ints = self.strings_to_ints(last_four)
+
     encoded = []
 
     message_enum = split_message.to_enum
