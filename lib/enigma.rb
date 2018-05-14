@@ -1,9 +1,10 @@
-require './lib/encryptor'
+require './lib/encrypt'
+require './lib/key_generator'
 # this is a comment to keep rubocop quiet
 class Enigma
-  attr_reader :encryptor
-
-  def initialize
-    @encryptor = Encryptor.new
+  def encrypt(message, key = KeyGenerator.new.rand_key,\
+              date = Date.today.strftime('%m%d%y'))
+    x = Encrypt.new(message, key, date)
+    x.encryptor
   end
 end
