@@ -5,8 +5,7 @@ class Decrypt
               :date,
               :characters
 
-  def initialize(message = nil, key = nil,\
-                 date = Date.today.strftime('%m%d%y'))
+  def initialize(message, key, date)
     @message    = message
     @key        = key
     @date       = date

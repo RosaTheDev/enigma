@@ -28,7 +28,6 @@ class Encrypt
         key << split_array[i] + split_array[i + 1]
       end
     end
-
     key
   end
 
