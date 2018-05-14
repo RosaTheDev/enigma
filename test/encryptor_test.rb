@@ -93,6 +93,6 @@ class EncryptorTest < Minitest::Test
     message = @encryptor.split_message
     secret_message = @encryptor.encrypt(message, key_ints, date_ints)
 
-    assert_equal "p os6.y oedsa5xep0e.adj.7", secret_message
+    assert_equal "p os6.y oedsa5xep0e.adj.7", secret_message 
   end
 end
