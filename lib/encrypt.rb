@@ -1,5 +1,5 @@
 # this is our encryptor class
-class Encryptor
+class Encrypt
   attr_reader :key,
               :message,
               :date,
@@ -28,6 +28,7 @@ class Encryptor
         key << split_array[i] + split_array[i + 1]
       end
     end
+
     key
   end
 
@@ -57,7 +58,7 @@ class Encryptor
     @message.chars
   end
 
-  def encrypt(message, key_ints, date_ints)
+  def encryptor(message, key_ints, date_ints)
     encoded = []
     message_enum = message.to_enum
     final_key = final_key_for_encode(key_ints, date_ints)
