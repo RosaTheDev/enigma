@@ -1,5 +1,5 @@
 # this is our encryptor class
-class Encryptor
+class Encrypt
   attr_reader :key,
               :message,
               :date,
@@ -28,6 +28,7 @@ class Encryptor
         key << split_array[i] + split_array[i + 1]
       end
     end
+
     key
   end
 
@@ -57,10 +58,20 @@ class Encryptor
     @message.chars
   end
 
-  def encrypt(message, key_ints, date_ints)
+  def encryptor
+    key_array = self.split_into_four_strings
+    key_ints  = self.strings_to_ints(key_array)
+
+    sqr_date  = self.square_date
+    last_four = self.last_four_digits_of_date_squared(sqr_date)
+    date_ints = self.strings_to_ints(last_four)
+
     encoded = []
-    message_enum = message.to_enum
+
+    message_enum = split_message.to_enum
+
     final_key = final_key_for_encode(key_ints, date_ints)
+
     loop do
       letter = message_enum.next
       x = @characters.rotate(@characters.index(letter) + final_key[0])
