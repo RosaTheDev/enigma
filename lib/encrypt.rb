@@ -9,7 +9,7 @@ class Encrypt
 
               #message and key are nil because in the spec they are not required and if you do not assign them a value they return an error
   def initialize(message = nil, key = nil,\
-                 date = Date.today.strftime('%m%d%y'))
+                 date = Date.today.strftime('%d%m%y'))
     @message    = message
     @key        = key
     @date       = date
@@ -27,7 +27,7 @@ class Encrypt
     message_enum = split_message.to_enum
 
     final_key = final_key_for_encode(key_ints, date_ints)
-    
+
     loop do
       letter = message_enum.next
       char_rotate = @characters.rotate(@characters.index(letter) + final_key[0])

@@ -21,15 +21,15 @@ class Decrypt
   end
 
   def decryptor
-      encoded = []
-      message_enum = split_message.to_enum
-      final_key = final_key_for_encode(key_ints, date_ints)
-      loop do
-        letter = message_enum.next
-        char_rotate = @characters.rotate(@characters.index(letter) - final_key[0])
-        encoded << char_rotate[0]
-        final_key.rotate!
-      end
-      encoded.join
+    encoded = []
+    message_enum = split_message.to_enum
+    final_key = final_key_for_encode(key_ints, date_ints)
+    loop do
+      letter = message_enum.next
+      char_rotate = @characters.rotate(@characters.index(letter) - final_key[0])
+      encoded << char_rotate[0]
+      final_key.rotate!
+    end
+    encoded.join
   end
 end
