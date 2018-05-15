@@ -82,10 +82,6 @@ class EncryptTest < Minitest::Test
   end
 
   def test_encryptor
-<<<<<<< HEAD:test/encryptor_test.rb
     assert_equal "p os6.y oedsa5xep0e.adj.7", @encrypt.encryptor
-=======
-    assert_equal 'p os6.y oedsa5xep0e.adj.7', @encrypt.encryptor
->>>>>>> 4388704a10b63cef43396201a37a3fd766654767:test/encrypt_test.rb
   end
 end

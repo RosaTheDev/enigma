@@ -23,7 +23,6 @@ class Crack
   def compare_chars_with_known_end(encrypted_end)
     encrypted_end.map.with_index do |letter, index|
       @characters.rotate(@characters.index(letter)).index(@actual_end[index])
-      binding.pry
     end
   end
 
@@ -35,21 +34,25 @@ class Crack
     @message.chars
   end
 
-  def cracker
-    a = last_four_chars_of_encryption_into_array
-    b = compare_chars_with_known_end(a)
-    final_key = rotate_encryption_shift_to_actual_order(b)
-
+  def crack_message_loop(message, final_key)
     encoded = []
-
-    message_enum = split_message.to_enum
-
+    message = split_message.to_enum
     loop do
-      letter = message_enum.next
+      letter = message.next
       x = @characters.rotate(@characters.index(letter) + final_key[0])
       encoded << x[0]
       final_key.rotate!
     end
     encoded.join
   end
+
+  def cracker
+    a = last_four_chars_of_encryption_into_array
+    b = compare_chars_with_known_end(a)
+    final_key = rotate_encryption_shift_to_actual_order(b)
+
+    message_enum = split_message.to_enum
+
+    c = crack_message_loop(message_enum, final_key)
+  end 
 end
