@@ -70,11 +70,11 @@ class Encrypt
     message_enum = split_message.to_enum
 
     final_key = final_key_for_encode(key_ints, date_ints)
-
+    
     loop do
       letter = message_enum.next
-      x = @characters.rotate(@characters.index(letter) + final_key[0])
-      encoded << x[0]
+      char_rotate = @characters.rotate(@characters.index(letter) + final_key[0])
+      encoded << char_rotate[0]
       final_key.rotate!
     end
     encoded.join
