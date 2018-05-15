@@ -25,4 +25,30 @@ class Crack
       @characters.rotate(@characters.index(letter)).index(@actual_end[index])
     end
   end
+
+  def rotate_encryption_shift_to_actual_order(encrypt_nums)
+    encrypt_nums.rotate(- (@message.length - 4))
+  end
+
+  def split_message
+    @message.chars
+  end
+
+  def cracker
+    a = self.last_four_chars_of_encryption_into_array
+    b = self.compare_chars_with_known_end(a)
+    final_key = [4, 10, 33, 0]
+
+    encoded = []
+
+    message_enum = split_message.to_enum
+
+    loop do
+      letter = message_enum.next
+      x = @characters.rotate(@characters.index(letter) - final_key[0])
+      encoded << x[0]
+      final_key.rotate!
+    end
+    encoded.join
+  end
 end
