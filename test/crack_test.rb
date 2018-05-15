@@ -3,44 +3,45 @@ require './lib/crack'
 
 class CrackTest < Minitest::Test
   def setup
-    @crack = Crack.new('p os6.y oedsa5xep0e.adj.7',\
+    @crack_1 = Crack.new('p os6.y oedsa5xep0e.adj.7',\
                        32_435, '051218')
+                       
   end
 
   def test_crack_exists
-    assert_instance_of Crack, @crack
+    assert_instance_of Crack, @crack_1
   end
 
   def test_crack_takes_a_message
-    assert_equal 'p os6.y oedsa5xep0e.adj.7', @crack.message
+    assert_equal 'p os6.y oedsa5xep0e.adj.7', @crack_1.message
   end
 
   def test_crack_takes_a_date
-    assert_equal '051218', @crack.date
+    assert_equal '051218', @crack_1.date
   end
 
   def test_crack_has_characters
-    assert @crack.characters.include? 'a'
-    assert @crack.characters.include? '0'
-    assert @crack.characters.include? '.'
+    assert @crack_1.characters.include? 'a'
+    assert @crack_1.characters.include? '0'
+    assert @crack_1.characters.include? '.'
   end
 
   def test_last_four_chars_of_encryption_into_array
-    last_four = @crack.last_four_chars_of_encryption_into_array
+    last_four = @crack_1.last_four_chars_of_encryption_into_array
     assert_equal ["d", "j", ".", "7"], last_four
   end
 
   def test_compare_encrypted_chars_with_known_end_chars
-    last_four = @crack.last_four_chars_of_encryption_into_array
-    encrypt_nums = @crack.compare_chars_with_known_end(last_four)
+    last_four = @crack_1.last_four_chars_of_encryption_into_array
+    encrypt_nums = @crack_1.compare_chars_with_known_end(last_four)
 
     assert_equal [10, 33, 0, 4], encrypt_nums
   end
 
   def test_rotate_encryption_shift_to_actual_order
-    last_four = @crack.last_four_chars_of_encryption_into_array
-    encrypt_nums = @crack.compare_chars_with_known_end(last_four)
-    actual_order = @crack.rotate_encryption_shift_to_actual_order(encrypt_nums)
+    last_four = @crack_1.last_four_chars_of_encryption_into_array
+    encrypt_nums = @crack_1.compare_chars_with_known_end(last_four)
+    actual_order = @crack_1.rotate_encryption_shift_to_actual_order(encrypt_nums)
 
     assert_equal [4, 10, 33, 0], actual_order
   end
@@ -50,12 +51,12 @@ class CrackTest < Minitest::Test
                 "y", " ", "o", "e", "d", "s",\
                 "a", "5", "x", "e", "p", "0",\
                 "e", ".", "a", "d", "j", ".","7"]
-    actual   = @crack.split_message
+    actual   = @crack_1.split_message
 
     assert_equal expected, actual
   end
 
   def test_crack
-    assert_equal 'this is so secret ..end..', @crack.cracker
+    assert_equal 'this is so secret ..end..', @crack_1.cracker
   end
 end

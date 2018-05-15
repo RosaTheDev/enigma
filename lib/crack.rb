@@ -23,6 +23,7 @@ class Crack
   def compare_chars_with_known_end(encrypted_end)
     encrypted_end.map.with_index do |letter, index|
       @characters.rotate(@characters.index(letter)).index(@actual_end[index])
+      binding.pry
     end
   end
 
@@ -35,9 +36,9 @@ class Crack
   end
 
   def cracker
-    a = self.last_four_chars_of_encryption_into_array
-    b = self.compare_chars_with_known_end(a)
-    final_key = self.rotate_encryption_shift_to_actual_order(b)
+    a = last_four_chars_of_encryption_into_array
+    b = compare_chars_with_known_end(a)
+    final_key = rotate_encryption_shift_to_actual_order(b)
 
     encoded = []
 
