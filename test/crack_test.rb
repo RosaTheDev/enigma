@@ -44,7 +44,7 @@ class CrackTest < Minitest::Test
 
     assert_equal [4, 10, 33, 0], actual_order
   end
-  
+
   def test_split_message
     expected = ["p", " ", "o", "s", "6", ".",\
                 "y", " ", "o", "e", "d", "s",\

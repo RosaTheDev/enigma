@@ -37,7 +37,7 @@ class Crack
   def cracker
     a = self.last_four_chars_of_encryption_into_array
     b = self.compare_chars_with_known_end(a)
-    final_key = [4, 10, 33, 0]
+    final_key = self.rotate_encryption_shift_to_actual_order(b)
 
     encoded = []
 
@@ -45,7 +45,7 @@ class Crack
 
     loop do
       letter = message_enum.next
-      x = @characters.rotate(@characters.index(letter) - final_key[0])
+      x = @characters.rotate(@characters.index(letter) + final_key[0])
       encoded << x[0]
       final_key.rotate!
     end
