@@ -6,9 +6,14 @@ class Decrypt
               :message,
               :date,
               :characters
+<<<<<<< HEAD
               #message and key are nil because in the spec they are not required and if you do not assign them a value they return an error
   def initialize(message = nil, key = nil,\
                  date = Date.today.strftime('%m%d%y'))
+=======
+
+  def initialize(message, key, date)
+>>>>>>> b0be06b0a69c9c48cbc602637d1d9368e930ff6e
     @message    = message
     @key        = key
     @date       = date

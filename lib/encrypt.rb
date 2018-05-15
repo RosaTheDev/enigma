@@ -58,12 +58,12 @@ class Encrypt
   end
 
   def encryptor
-    key_array = self.split_into_four_strings
-    key_ints  = self.strings_to_ints(key_array)
+    key_array = split_into_four_strings
+    key_ints  = strings_to_ints(key_array)
 
-    sqr_date  = self.square_date
-    last_four = self.last_four_digits_of_date_squared(sqr_date)
-    date_ints = self.strings_to_ints(last_four)
+    sqr_date  = square_date
+    last_four = last_four_digits_of_date_squared(sqr_date)
+    date_ints = strings_to_ints(last_four)
 
     encoded = []
 
