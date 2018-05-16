@@ -1,15 +1,14 @@
 require './test/test_helper'
-require './lib/crack'
+require './lib/cracked'
 
 class CrackTest < Minitest::Test
   def setup
-    @crack_1 = Crack.new('p os6.y oedsa5xep0e.adj.7',\
+    @crack_1 = Cracked.new('p os6.y oedsa5xep0e.adj.7',\
                        32_435, '051218')
-
   end
 
   def test_crack_exists
-    assert_instance_of Crack, @crack_1
+    assert_instance_of Cracked, @crack_1
   end
 
   def test_crack_takes_a_message

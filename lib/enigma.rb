@@ -1,21 +1,31 @@
 require './lib/key_generator'
-require './lib/encrypt'
-require './lib/decrypt'
-require './lib/crack'
+require './lib/encryptor'
+require './lib/decryptor'
+require 'date'
 # this is a comment to keep rubocop quiet
 class Enigma
-  def encrypt(message, key, date)
-    x = Encrypt.new(message, key, date)
-    x.encryptor
+  attr_reader :key, :date
+
+  def initialize(key = nil, date = nil)
+    @key = key
+    @date = date
+
+  end
+  def encrypt(message, key = KeyGenerator.new.rand_key,\
+              date = Date.today.strftime('%d%m%y'))
+    enigma = Encrypt.new(message, key, date)
+    @key = key
+    @date = date
+    enigma.encryptor
   end
 
   def decrypt(message, key, date)
-    x = Decrypt.new(message, key, date)
-    x.decryptor
+    alan_turing = Decrypt.new(message, key, date)
+    alan_turing.decryptor
   end
 
   def crack(message, key, date)
-    x = Crack.new(message, key, date)
-    x.cracker
+    alan_turing = Crack.new(message, key, date)
+    alan_turing.cracker
   end
 end
