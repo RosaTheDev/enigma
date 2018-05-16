@@ -25,4 +25,12 @@ class EnigmaTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_spec_interaction_for_enigma_to_crack
+    expected = 'this is so secret ..end..'
+    actual   = @e.crack('p os6.y oedsa5xep0e.adj.7',\
+               32_435, '051218')
+
+    assert_equal expected, actual
+  end
 end
