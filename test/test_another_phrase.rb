@@ -3,7 +3,7 @@ require './lib/encryptor'
 
 class EncryptTest < Minitest::Test
   def setup
-    @encrypt = Encrypt.new('this is so secret ..end..', 32_435, '051218')
+    @encrypt = Encrypt.new('my name is jeff ..end..', 32_435, '051218')
   end
 
   def test_encrypt_exists
@@ -15,7 +15,7 @@ class EncryptTest < Minitest::Test
   end
 
   def test_encrypt_takes_a_message
-    assert_equal 'this is so secret ..end..', @encrypt.message
+    assert_equal 'my name is jeff ..end..', @encrypt.message
   end
 
   def test_date
@@ -32,8 +32,7 @@ class EncryptTest < Minitest::Test
   def test_split_into_four_strings
     # skip
     key_array = @encrypt.split_into_four_strings
-
-    assert_equal ['32', '24', '43', '35'], key_array
+    assert_equal %w[32 24 43 35], key_array
   end
 
   def test_change_four_strings_to_ints
@@ -54,7 +53,7 @@ class EncryptTest < Minitest::Test
     sqr_date  = @encrypt.square_date
     last_four = @encrypt.last_four_digits_of_date_squared(sqr_date)
 
-    assert_equal ['3', '5', '2', '4'], last_four
+    assert_equal %w[3 5 2 4], last_four
   end
 
   def test_final_key_for_encode
@@ -73,15 +72,15 @@ class EncryptTest < Minitest::Test
 
   def test_split_message
     # skip
-    expected = ['t', 'h', 'i', 's', ' ', 'i', 's', ' ',\
-                's', 'o', ' ', 's', 'e', 'c', 'r', 'e', 't',\
-                ' ', '.', '.', 'e', 'n', 'd', '.', '.']
+    expected = ['m', 'y', ' ', 'n', 'a', 'm', 'e', ' ',\
+                'i', 's', ' ', 'j', 'e', 'f', 'f', ' ',\
+                '.', '.', 'e', 'n', 'd', '.', '.']
     actual   = @encrypt.split_message
 
     assert_equal expected, actual
   end
 
   def test_encryptor
-    assert_equal 'p os6.y oedsa5xep0e.adj.7', @encrypt.encryptor
+    assert_equal 'iodn9ck eidja8l 71kn,1e', @encrypt.encryptor
   end
 end

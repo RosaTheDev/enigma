@@ -1,82 +1,13 @@
-# this is our encryptor class
-class Encrypt
-  attr_reader :key,
-              :message,
-              :date,
-              :characters
+require './lib/enigma'
 
-  def initialize(message = nil, key = nil,\
-                 date = Date.today.strftime('%d%m%y'))
-    @message    = message
-    @key        = key
-    @date       = date
-    @characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g',\
-                   'h', 'i', 'j', 'k', 'l', 'm', 'n',\
-                   'o', 'p', 'q', 'r', 's', 't', 'u',\
-                   'v', 'w', 'x', 'y', 'z', '0', '1',\
-                   '2', '3', '4', '5', '6', '7', '8',\
-                   '9', ' ', '.', ',']
-  end
+message_to_encrypt = File.open(ARGV[0], "r")
+text = message_to_encrypt.read.strip
+message_to_encrypt.close
 
-  def split_into_four_strings
-    key = []
-    split_array = @key.to_s.split('')
-    split_array.each_index do |i|
-      if i == 4
-        i
-      else
-        key << split_array[i] + split_array[i + 1]
-      end
-    end
-    key
-  end
+enigma = Enigma.new
 
-  def strings_to_ints(key_array)
-    key_array.map do |string|
-      string.to_i
-    end
-  end
+message_to_decrypt = File.open(ARGV[1], "w")
+message_to_decrypt.write(enigma.encrypt(text))
+message_to_decrypt.close
 
-  def square_date
-    @date.to_i**2
-  end
-
-  def last_four_digits_of_date_squared(sqrt_date)
-    sqrt_date.to_s[-4..-1].chars
-  end
-
-  def final_key_for_encode(key_int, date_ints)
-    final_code = []
-    key_int.each_index do |index|
-      final_code << key_int[index] + date_ints[index]
-    end
-    final_code
-  end
-
-  def split_message
-    @message.chars
-  end
-
-  def encryptor
-    key_array = split_into_four_strings
-    key_ints  = strings_to_ints(key_array)
-
-    sqr_date  = square_date
-    last_four = last_four_digits_of_date_squared(sqr_date)
-    date_ints = strings_to_ints(last_four)
-
-    encoded = []
-
-    message_enum = split_message.to_enum
-
-    final_key = final_key_for_encode(key_ints, date_ints)
-
-    loop do
-      letter = message_enum.next
-      char_rotate = @characters.rotate(@characters.index(letter) + final_key[0])
-      encoded << char_rotate[0]
-      final_key.rotate!
-    end
-    encoded.join
-  end
-end
+puts "Created 'encrypted.txt' with the key #{enigma.key} and date #{enigma.date}"

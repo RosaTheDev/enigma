@@ -1,6 +1,7 @@
 module MethodsForEncAndDec
   def key_array
     split_into_four_strings
+    # require'pry';binding.pry
   end
 
   def key_ints
@@ -19,6 +20,7 @@ module MethodsForEncAndDec
     strings_to_ints(last_four)
   end
 
+##map
   def split_into_four_strings
     key = []
     split_array = @key.to_s.split('')
@@ -42,7 +44,6 @@ module MethodsForEncAndDec
     @date.to_i**2
   end
 
-  ##we had to put -4 .. -1 because to get the last four of an array you need to count backwards
   def last_four_digits_of_date_squared(sqrt_date)
     sqrt_date.to_s[-4..-1].chars
   end
@@ -60,6 +61,6 @@ module MethodsForEncAndDec
   end
 
   def message_enum
-  split_message.to_enum
+    split_message.to_enum
   end
 end
