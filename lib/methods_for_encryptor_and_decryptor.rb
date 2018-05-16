@@ -51,11 +51,9 @@ module MethodsForEncAndDec
   end
 
   def final_key_for_encode(key_int, date_ints)
-    final_code = []
-    key_int.each_index do |index|
-      final_code << key_int[index] + date_ints[index]
+    key_int.map.with_index do |key, index|
+      key_int[index] + date_ints[index]
     end
-    final_code
   end
 
   def split_message
