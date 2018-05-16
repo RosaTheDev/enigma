@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/decrypt'
+require './lib/decryptor'
 
 class DecryptTest < Minitest::Test
   def setup
@@ -30,7 +30,6 @@ class DecryptTest < Minitest::Test
   end
 
   def test_split_into_four_strings
-    # skip
     key_array = @decrypt.split_into_four_strings
 
     assert_equal ['32', '24', '43', '35'], key_array
@@ -78,6 +77,25 @@ class DecryptTest < Minitest::Test
                 "a", "5", "x", "e", "p", "0",\
                 "e", ".", "a", "d", "j", ".","7"]
     actual   = @decrypt.split_message
+
+    assert_equal expected, actual
+  end
+
+  def test_decryptor_loop
+    key_array      = @decrypt.split_into_four_strings
+    key_ints       = @decrypt.strings_to_ints(key_array)
+
+    sqr_date       = @decrypt.square_date
+    last_four      = @decrypt.last_four_digits_of_date_squared(sqr_date)
+    date_ints      = @decrypt.strings_to_ints(last_four)
+
+    final_key      = @decrypt.final_key_for_encode(key_ints, date_ints)
+
+    message_enum   = @decrypt.split_message.to_enum
+
+    actual         = @decrypt.decryptor_loop(message_enum, final_key)
+
+    expected       = 'this is so secret ..end..'
 
     assert_equal expected, actual
   end

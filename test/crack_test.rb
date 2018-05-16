@@ -1,15 +1,14 @@
 require './test/test_helper'
-require './lib/crack'
+require './lib/cracked'
 
 class CrackTest < Minitest::Test
   def setup
-    @crack_1 = Crack.new('p os6.y oedsa5xep0e.adj.7',\
+    @crack_1 = Cracked.new('p os6.y oedsa5xep0e.adj.7',\
                        32_435, '051218')
-                       
   end
 
   def test_crack_exists
-    assert_instance_of Crack, @crack_1
+    assert_instance_of Cracked, @crack_1
   end
 
   def test_crack_takes_a_message
@@ -54,6 +53,18 @@ class CrackTest < Minitest::Test
     actual   = @crack_1.split_message
 
     assert_equal expected, actual
+  end
+
+  def test_crack_message_loop
+    a = @crack_1.last_four_chars_of_encryption_into_array
+    b = @crack_1.compare_chars_with_known_end(a)
+    final_key = @crack_1.rotate_encryption_shift_to_actual_order(b)
+
+    message = @crack_1.split_message.to_enum
+
+    cracked = @crack_1.crack_message_loop(message, final_key)
+
+    assert_equal 'this is so secret ..end..', cracked
   end
 
   def test_crack

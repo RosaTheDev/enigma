@@ -4,5 +4,6 @@ class KeyGenerator
 
   def initialize
     @rand_key = rand(10_000..99_999)
+    # require'pry';binding.pry
   end
 end
