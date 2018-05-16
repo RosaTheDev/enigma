@@ -1,5 +1,6 @@
 require './lib/enigma'
 
+
 message_to_crack = File.open(ARGV[0], "r")
 text = message_to_crack.read.strip
 message_to_crack.close

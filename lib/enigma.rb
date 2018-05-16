@@ -20,8 +20,12 @@ class Enigma
   end
 
   def decrypt(message, key, date)
-
     alan_turing = Decrypt.new(message, key, date)
     alan_turing.decryptor
+  end
+
+  def crack(message, key, date)
+    alan_turing = Crack.new(message, key, date)
+    alan_turing.cracker
   end
 end

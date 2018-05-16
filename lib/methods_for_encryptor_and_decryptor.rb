@@ -1,4 +1,5 @@
 module MethodsForEncAndDec
+
   def key_array
     split_into_four_strings
     # require'pry';binding.pry
@@ -21,6 +22,7 @@ module MethodsForEncAndDec
   end
 
 ##map
+# These are methods for encrypt and decrypt
   def split_into_four_strings
     key = []
     split_array = @key.to_s.split('')
@@ -63,4 +65,20 @@ module MethodsForEncAndDec
   def message_enum
     split_message.to_enum
   end
+
+# These are methods for crack
+  def last_four_chars_of_encryption_into_array
+    @message[-4..-1].chars
+  end
+
+  def compare_chars_with_known_end(encrypted_end)
+    encrypted_end.map.with_index do |letter, index|
+      @characters.rotate(@characters.index(letter)).index(@actual_end[index])
+    end
+  end
+
+  def rotate_encryption_shift_to_actual_order(encrypt_nums)
+    encrypt_nums.rotate(- (@message.length - 4))
+  end
+
 end

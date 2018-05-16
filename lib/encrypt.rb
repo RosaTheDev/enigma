@@ -11,3 +11,4 @@ message_to_decrypt.write(enigma.encrypt(text))
 message_to_decrypt.close
 
 puts "Created 'encrypted.txt' with the key #{enigma.key} and date #{enigma.date}"
+ 
