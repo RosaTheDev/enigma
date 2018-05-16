@@ -1,4 +1,6 @@
+require './lib/methods_for_encryptor_and_decryptor'
 class Crack
+  include MethodsForEncAndDec
   attr_reader :key,
               :message,
               :date,
@@ -28,10 +30,6 @@ class Crack
 
   def rotate_encryption_shift_to_actual_order(encrypt_nums)
     encrypt_nums.rotate(- (@message.length - 4))
-  end
-
-  def split_message
-    @message.chars
   end
 
   def crack_message_loop(message, final_key)
