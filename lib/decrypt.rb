@@ -1,12 +1,13 @@
+require './lib/methods_for_encryptor_and_decryptor'
 # this is our encryptor class
 class Decrypt
+  include MethodsForEncAndDec
   attr_reader :key,
               :message,
               :date,
               :characters
 
-  def initialize(message = nil, key = nil,\
-                 date = Date.today.strftime('%m%d%y'))
+  def initialize(message, key, date)
     @message    = message
     @key        = key
     @date       = date
@@ -18,64 +19,30 @@ class Decrypt
                    '9', ' ', '.', ',']
   end
 
-  def split_into_four_strings
-    key = []
-    split_array = @key.to_s.split('')
-    split_array.each_index do |i|
-      if i == 4
-        i
-      else
-        key << split_array[i] + split_array[i + 1]
-      end
-    end
-    key
-  end
-
-  def strings_to_ints(key_array)
-    key_array.map do |string|
-      string.to_i
-    end
-  end
-
-  def square_date
-    @date.to_i**2
-  end
-
-  def last_four_digits_of_date_squared(sqrt_date)
-    sqrt_date.to_s[-4..-1].chars
-  end
-
-  def final_key_for_encode(key_int, date_ints)
-    final_code = []
-    key_int.each_index do |index|
-      final_code << key_int[index] + date_ints[index]
-    end
-    final_code
-  end
-
-  def split_message
-    @message.chars
-  end
-
-  def decryptor
-    key_array = self.split_into_four_strings
-    key_ints  = self.strings_to_ints(key_array)
-
-    sqr_date  = self.square_date
-    last_four = self.last_four_digits_of_date_squared(sqr_date)
-    date_ints = self.strings_to_ints(last_four)
-
+  def decryptor_loop(message_enum, final_key)
     encoded = []
-
-    message_enum = split_message.to_enum
-
-    final_key = final_key_for_encode(key_ints, date_ints)
     loop do
       letter = message_enum.next
-      x = @characters.rotate(@characters.index(letter) - final_key[0])
-      encoded << x[0]
+      char_rotate = @characters.rotate(@characters.index(letter) - final_key[0])
+      encoded << char_rotate[0]
       final_key.rotate!
     end
     encoded.join
+  end
+
+
+  def decryptor
+    key_array      = split_into_four_strings
+    key_ints       = strings_to_ints(key_array)
+
+    sqr_date       = square_date
+    last_four      = last_four_digits_of_date_squared(sqr_date)
+    date_ints      = strings_to_ints(last_four)
+
+    final_key      = final_key_for_encode(key_ints, date_ints)
+
+    message_enum   = split_message.to_enum
+
+    return decryptor_loop(message_enum, final_key)
   end
 end
