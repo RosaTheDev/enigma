@@ -1,25 +1,26 @@
 module MethodsForEncAndDec
   def key_array
-    self.split_into_four_strings
+    split_into_four_strings
+    # require'pry';binding.pry
   end
 
   def key_ints
-    self.strings_to_ints(key_array)
+    strings_to_ints(key_array)
   end
 
   def sqr_date
-    self.square_date
+    square_date
   end
 
   def last_four
-    self.last_four_digits_of_date_squared(sqr_date)
+    last_four_digits_of_date_squared(sqr_date)
   end
 
   def date_ints
-    self.strings_to_ints(last_four)
+    strings_to_ints(last_four)
   end
 
-
+##map
   def split_into_four_strings
     key = []
     split_array = @key.to_s.split('')
@@ -43,28 +44,23 @@ module MethodsForEncAndDec
     @date.to_i**2
   end
 
-  ##we had to put -4 .. -1 because to get the last four of an array you need to count backwards
-    def last_four_digits_of_date_squared(sqrt_date)
-      sqrt_date.to_s[-4..-1].chars
-    end
+  def last_four_digits_of_date_squared(sqrt_date)
+    sqrt_date.to_s[-4..-1].chars
+  end
 
-    def final_key_for_encode(key_int, date_ints)
-      final_code = []
-      key_int.each_index do |index|
-        final_code << key_int[index] + date_ints[index]
-      end
-      final_code
+  def final_key_for_encode(key_int, date_ints)
+    final_code = []
+    key_int.each_index do |index|
+      final_code << key_int[index] + date_ints[index]
     end
+    final_code
+  end
 
-    def split_message
-      @message.chars
-    end
-    #
-    def message_enum
+  def split_message
+    @message.chars
+  end
+
+  def message_enum
     split_message.to_enum
-    end
-    #
-    # def letter
-    #   message_enum.next
-    # end
+  end
 end

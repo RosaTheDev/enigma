@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/decrypt'
+require './lib/decryptor'
 
 class DecryptTest < Minitest::Test
   def setup
