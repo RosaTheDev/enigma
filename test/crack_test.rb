@@ -61,7 +61,9 @@ class CrackTest < Minitest::Test
     b = @crack_1.compare_chars_with_known_end(a)
     final_key = @crack_1.rotate_encryption_shift_to_actual_order(b)
 
-    cracked = @crack_1.crack_message_loop(@crack_1.message, final_key)
+    message = @crack_1.split_message.to_enum
+
+    cracked = @crack_1.crack_message_loop(message, final_key)
 
     assert_equal 'this is so secret ..end..', cracked
   end

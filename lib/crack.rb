@@ -36,11 +36,10 @@ class Crack
 
   def crack_message_loop(message, final_key)
     encoded = []
-    message = split_message.to_enum
     loop do
-      letter = message.next
-      x = @characters.rotate(@characters.index(letter) + final_key[0])
-      encoded << x[0]
+      letter  = message.next
+      cracked = @characters.rotate(@characters.index(letter) + final_key[0])
+      encoded <<  cracked[0]
       final_key.rotate!
     end
     encoded.join
@@ -51,8 +50,8 @@ class Crack
     b = compare_chars_with_known_end(a)
     final_key = rotate_encryption_shift_to_actual_order(b)
 
-    message_enum = split_message.to_enum
+    message = split_message.to_enum
 
-    c = crack_message_loop(message_enum, final_key)
-  end 
+    return crack_message_loop(message, final_key)
+  end
 end
