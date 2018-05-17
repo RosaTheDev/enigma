@@ -1,6 +1,6 @@
 require './lib/methods_for_encryptor_and_decryptor'
 # this is our encryptor class
-class Encrypt
+class Encryptor
   include MethodsForEncAndDec
   attr_reader :key,
               :message,

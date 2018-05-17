@@ -1,6 +1,6 @@
 require './lib/methods_for_encryptor_and_decryptor'
 # this is our encryptor class
-class Decrypt
+class Decryptor
   include MethodsForEncAndDec
   attr_reader :key,
               :message,
@@ -18,7 +18,7 @@ class Decrypt
                    '2', '3', '4', '5', '6', '7', '8',\
                    '9', ' ', '.', ',']
   end
-  
+
   def decryptor
     encoded = []
     message_enum = split_message.to_enum
