@@ -3,11 +3,11 @@ require './lib/decryptor'
 
 class DecryptTest < Minitest::Test
   def setup
-    @decrypt = Decrypt.new('p os6.y oedsa5xep0e.adj.7', 32_435, '051218')
+    @decrypt = Decryptor.new('p os6.y oedsa5xep0e.adj.7', 32_435, '051218')
   end
 
   def test_decrypt_exists
-    assert_instance_of Decrypt, @decrypt
+    assert_instance_of Decryptor, @decrypt
   end
 
   def test_decrypt_takes_a_key
