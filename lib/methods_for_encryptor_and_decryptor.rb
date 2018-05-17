@@ -43,7 +43,11 @@ module MethodsForEncAndDec
   end
 
   def square_date
-    @date.to_i**2
+    if @date.class == Date
+      @date.strftime('%d%m%y').to_i ** 2
+    else
+      @date.to_i**2
+    end
   end
 
   def last_four_digits_of_date_squared(sqrt_date)
