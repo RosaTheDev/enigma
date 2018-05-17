@@ -14,14 +14,14 @@ class Enigma
   end
   def encrypt(message, key = KeyGenerator.new.rand_key,\
               date = Date.today.strftime('%d%m%y'))
-    enigma = Encrypt.new(message, key, date)
+    enigma = Encryptor.new(message, key, date)
     @key = key
     @date = date
     enigma.encryptor
   end
 
   def decrypt(message, key, date)
-    alan_turing = Decrypt.new(message, key, date)
+    alan_turing = Decryptor.new(message, key, date)
     alan_turing.decryptor
   end
 

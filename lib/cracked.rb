@@ -20,22 +20,24 @@ class Cracked
                    '9', ' ', '.', ',']
   end
 
-  def cracker
-    last_four = last_four_chars_of_encryption_into_array
-
-    comparison = compare_chars_with_known_end(last_four)
-
-    final_key = rotate_encryption_shift_to_actual_order(comparison)
-
+  def crack_message_loop(message, final_key)
     encoded = []
-
-    message_enum = split_message.to_enum
     loop do
-      letter = message_enum.next
-      char_rotate = @characters.rotate(@characters.index(letter) + final_key[0])
-      encoded << char_rotate[0]
+      letter  = message.next
+      cracked = @characters.rotate(@characters.index(letter) + final_key[0])
+      encoded <<  cracked[0]
       final_key.rotate!
     end
     encoded.join
+  end
+
+  def cracker
+    a = last_four_chars_of_encryption_into_array
+    b = compare_chars_with_known_end(a)
+    final_key = rotate_encryption_shift_to_actual_order(b)
+
+    message = split_message.to_enum
+
+    return crack_message_loop(message, final_key)
   end
 end

@@ -3,11 +3,11 @@ require './lib/encryptor'
 
 class EncryptTest < Minitest::Test
   def setup
-    @encrypt = Encrypt.new('this is so secret ..end..', 32_435, '051218')
+    @encrypt = Encryptor.new('this is so secret ..end..', 32_435, '051218')
   end
 
   def test_encrypt_exists
-    assert_instance_of Encrypt, @encrypt
+    assert_instance_of Encryptor, @encrypt
   end
 
   def test_encrypt_takes_a_key
