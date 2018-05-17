@@ -32,7 +32,7 @@ class DecryptTest < Minitest::Test
   def test_split_into_four_strings
     key_array = @decrypt.split_into_four_strings
 
-    assert_equal ['32', '24', '43', '35'], key_array
+    assert_equal %w[32 24 43 35], key_array
   end
 
   def test_change_four_strings_to_ints
@@ -53,7 +53,7 @@ class DecryptTest < Minitest::Test
     sqr_date  = @decrypt.square_date
     last_four = @decrypt.last_four_digits_of_date_squared(sqr_date)
 
-    assert_equal ['3', '5', '2', '4'], last_four
+    assert_equal %w[3 5 2 4], last_four
   end
 
   def test_final_key_for_encode
@@ -72,10 +72,10 @@ class DecryptTest < Minitest::Test
 
   def test_split_message
     # skip
-    expected = ["p", " ", "o", "s", "6", ".",\
-                "y", " ", "o", "e", "d", "s",\
-                "a", "5", "x", "e", "p", "0",\
-                "e", ".", "a", "d", "j", ".","7"]
+    expected = ['p', ' ', 'o', 's', '6', '.',\
+                'y', ' ', 'o', 'e', 'd', 's',\
+                'a', '5', 'x', 'e', 'p', '0',\
+                'e', '.', 'a', 'd', 'j', '.', '7']
     actual   = @decrypt.split_message
 
     assert_equal expected, actual

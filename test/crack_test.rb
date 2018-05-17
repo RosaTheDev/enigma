@@ -27,7 +27,7 @@ class CrackTest < Minitest::Test
 
   def test_last_four_chars_of_encryption_into_array
     last_four = @crack_1.last_four_chars_of_encryption_into_array
-    assert_equal ["d", "j", ".", "7"], last_four
+    assert_equal ['d', 'j', '.', '7'], last_four
   end
 
   def test_compare_encrypted_chars_with_known_end_chars
@@ -46,10 +46,10 @@ class CrackTest < Minitest::Test
   end
 
   def test_split_message
-    expected = ["p", " ", "o", "s", "6", ".",\
-                "y", " ", "o", "e", "d", "s",\
-                "a", "5", "x", "e", "p", "0",\
-                "e", ".", "a", "d", "j", ".","7"]
+    expected = ['p', ' ', 'o', 's', '6', '.',\
+                'y', ' ', 'o', 'e', 'd', 's',\
+                'a', '5', 'x', 'e', 'p', '0',\
+                'e', '.', 'a', 'd', 'j', '.','7']
     actual   = @crack_1.split_message
 
     assert_equal expected, actual

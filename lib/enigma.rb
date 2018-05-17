@@ -13,10 +13,10 @@ class Enigma
 
   end
   def encrypt(message, key = KeyGenerator.new.rand_key,\
-              date = Date.today.strftime('%d%m%y'))
+              date = Date.today)
     enigma = Encrypt.new(message, key, date)
     @key = key
-    @date = date
+    @date = date.strftime('%d%m%y')
     enigma.encryptor
   end
 
