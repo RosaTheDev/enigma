@@ -18,11 +18,9 @@ class Decrypt
                    '2', '3', '4', '5', '6', '7', '8',\
                    '9', ' ', '.', ',']
   end
-  
-  def decryptor
+
+  def decryptor_loop(message_enum, final_key)
     encoded = []
-    message_enum = split_message.to_enum
-    final_key = final_key_for_encode(key_ints, date_ints)
     loop do
       letter = message_enum.next
       char_rotate = @characters.rotate(@characters.index(letter) - final_key[0])
@@ -30,5 +28,21 @@ class Decrypt
       final_key.rotate!
     end
     encoded.join
+  end
+
+
+  def decryptor
+    key_array      = split_into_four_strings
+    key_ints       = strings_to_ints(key_array)
+
+    sqr_date       = square_date
+    last_four      = last_four_digits_of_date_squared(sqr_date)
+    date_ints      = strings_to_ints(last_four)
+
+    final_key      = final_key_for_encode(key_ints, date_ints)
+
+    message_enum   = split_message.to_enum
+
+    return decryptor_loop(message_enum, final_key)
   end
 end

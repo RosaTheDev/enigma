@@ -33,7 +33,7 @@ class EncryptTest < Minitest::Test
     # skip
     key_array = @encrypt.split_into_four_strings
 
-    assert_equal ['32', '24', '43', '35'], key_array
+    assert_equal %w[32 24 43 35], key_array
   end
 
   def test_change_four_strings_to_ints
@@ -54,7 +54,7 @@ class EncryptTest < Minitest::Test
     sqr_date  = @encrypt.square_date
     last_four = @encrypt.last_four_digits_of_date_squared(sqr_date)
 
-    assert_equal ['3', '5', '2', '4'], last_four
+    assert_equal %w[3 5 2 4], last_four
   end
 
   def test_final_key_for_encode
@@ -81,24 +81,24 @@ class EncryptTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_decryptor_loop
-    key_array      = @encrypt.split_into_four_strings
-    key_ints       = @encrypt.strings_to_ints(key_array)
-
-    sqr_date       = @encrypt.square_date
-    last_four      = @encrypt.last_four_digits_of_date_squared(sqr_date)
-    date_ints      = @encrypt.strings_to_ints(last_four)
-
-    final_key      = @encrypt.final_key_for_encode(key_ints, date_ints)
-
-    message_enum   = @encrypt.split_message.to_enum
-
-    actual         = @encrypt.encryptor_loop(message_enum, final_key)
-
-    expected       = "p os6.y oedsa5xep0e.adj.7"
-
-    assert_equal expected, actual
-  end
+  # def test_decryptor_loop
+  #   key_array      = @encrypt.split_into_four_strings
+  #   key_ints       = @encrypt.strings_to_ints(key_array)
+  #
+  #   sqr_date       = @encrypt.square_date
+  #   last_four      = @encrypt.last_four_digits_of_date_squared(sqr_date)
+  #   date_ints      = @encrypt.strings_to_ints(last_four)
+  #
+  #   final_key      = @encrypt.final_key_for_encode(key_ints, date_ints)
+  #
+  #   message_enum   = @encrypt.split_message.to_enum
+  #
+  #   actual         = @encrypt.encryptor_loop(message_enum, final_key)
+  #
+  #   expected       = "p os6.y oedsa5xep0e.adj.7"
+  #
+  #   assert_equal expected, actual
+  # end
 
   def test_encryptor
     assert_equal 'p os6.y oedsa5xep0e.adj.7', @encrypt.encryptor

@@ -43,7 +43,11 @@ module MethodsForEncAndDec
   end
 
   def square_date
-    @date.to_i**2
+    if @date.class == Date
+      @date.strftime('%d%m%y').to_i ** 2
+    else
+      @date.to_i**2
+    end
   end
 
   def last_four_digits_of_date_squared(sqrt_date)
@@ -51,11 +55,9 @@ module MethodsForEncAndDec
   end
 
   def final_key_for_encode(key_int, date_ints)
-    final_code = []
-    key_int.each_index do |index|
-      final_code << key_int[index] + date_ints[index]
+    key_int.map.with_index do |key, index|
+      key_int[index] + date_ints[index]
     end
-    final_code
   end
 
   def split_message

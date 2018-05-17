@@ -1,6 +1,7 @@
 require './lib/key_generator'
 require './lib/encryptor'
 require './lib/decryptor'
+require './lib/cracked'
 require 'date'
 # this is a comment to keep rubocop quiet
 class Enigma
@@ -12,10 +13,10 @@ class Enigma
 
   end
   def encrypt(message, key = KeyGenerator.new.rand_key,\
-              date = Date.today.strftime('%d%m%y'))
+              date = Date.today)
     enigma = Encrypt.new(message, key, date)
     @key = key
-    @date = date
+    @date = date.strftime('%d%m%y')
     enigma.encryptor
   end
 
@@ -25,7 +26,7 @@ class Enigma
   end
 
   def crack(message, key, date)
-    alan_turing = Crack.new(message, key, date)
+    alan_turing = Cracked.new(message, key, date)
     alan_turing.cracker
   end
 end
